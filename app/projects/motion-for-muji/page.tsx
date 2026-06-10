@@ -8,7 +8,6 @@ const credits = [
     'motion design',
     'december 2025',
     'promo video for the muji wall mounted cd player',
-    'tags : motion design',
 ];
 
 export default function MotionForMujiProject() {

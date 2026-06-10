@@ -271,6 +271,11 @@ body {
     position: relative;
     filter: none;
     transform: none;
+    transition: transform 0.5s ease;
+}
+
+.item:hover .item-image {
+    transform: scale(1.08);
 }
 
 .item-image img,
@@ -329,10 +334,10 @@ body {
     flex-direction: column;
     justify-content: space-between;
     padding: 20px 24px;
-    background-color: rgba(244, 244, 244, 0.2);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(244, 244, 244, 0.25);
+    background-color: rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     box-sizing: border-box;
     opacity: 0;
     transition: opacity 0.3s ease;
@@ -372,26 +377,6 @@ body {
     letter-spacing: 0.05em;
     color: rgba(255, 255, 255, 0.75);
     text-shadow: 0 1px 12px rgba(0, 0, 0, 0.25);
-}
-
-/* Cards with a naturally light/bright cover image: switch to dark text
-   so it stays readable against the light glass overlay. */
-.card-hover-glass.theme-light .card-hover-title,
-.card-hover-glass.theme-light .card-hover-description,
-.card-hover-glass.theme-light .card-hover-hint {
-    text-shadow: none;
-}
-
-.card-hover-glass.theme-light .card-hover-title {
-    color: #1a1a1a;
-}
-
-.card-hover-glass.theme-light .card-hover-description {
-    color: rgba(0, 0, 0, 0.7);
-}
-
-.card-hover-glass.theme-light .card-hover-hint {
-    color: rgba(0, 0, 0, 0.55);
 }
 
 
@@ -520,7 +505,7 @@ body {
     position: fixed;
     inset: 0;
     z-index: 10;
-    background-color: rgba(0, 0, 0, 0.45);
+    background-color: rgba(0, 0, 0, 0.591);
 }
 
 .showcase-back {
@@ -620,7 +605,7 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 40px;
-    padding-bottom: 128px;
+    padding-bottom: 880px;
 }
 
 .showcase-hero {
@@ -632,7 +617,7 @@ body {
     flex-direction: column;
     align-items: center;
     padding: 0 24px;
-    padding-top: 20vh;
+    padding-top: 30vh;
     text-align: center;
 }
 
@@ -831,6 +816,10 @@ body {
     .modal-body {
         padding: 40px 24px 24px 24px;
     }
+
+    .showcase-content {
+        padding-bottom: 600px;
+    }
 }
 
 /* =============================================
@@ -894,6 +883,10 @@ body {
         width: 34px;
         height: 34px;
         font-size: 20px;
+    }
+
+    .showcase-content {
+        padding-bottom: 420px;
     }
 }
 

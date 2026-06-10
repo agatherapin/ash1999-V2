@@ -10,14 +10,13 @@ const credits = [
     'trifold brochure',
     'jan 2024',
     'fictional festival around rap music & urban culture',
-    'tags : branding, print, typography',
 ];
 
 export default function SuburbanProject() {
     return (
         <ProjectShowcase
             backgroundVideo="/img/suburban/titre-motion.mp4"
-            titleLines={['suburban']}
+            titleLines={['suburban', 'design']}
             credits={credits}
             images={images}
         />

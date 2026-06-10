@@ -13,14 +13,13 @@ const credits = [
     'exhibition',
     'november 2024',
     'mapping & motion design by e-artsup students',
-    'tags : branding, print, motion design',
 ];
 
 export default function InterferencesProject() {
     return (
         <ProjectShowcase
             backgroundVideo="/img/interferences/motion-interferences.mp4"
-            titleLines={['interférences', 'exhibition']}
+            titleLines={['interférences exhibition', 'the new wave of motion design']}
             credits={credits}
             images={images}
         />

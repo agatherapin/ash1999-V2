@@ -21,7 +21,7 @@ export default function LaPampaProject() {
     return (
         <ProjectShowcase
             backgroundVideo="https://pub-4640cb8748ff42a1bb9564c86066b471.r2.dev/motion-la-pampa.mp4"
-            titleLines={['la pampa']}
+            titleLines={['la pampa', 'design']}
             credits={credits}
             images={images}
         />

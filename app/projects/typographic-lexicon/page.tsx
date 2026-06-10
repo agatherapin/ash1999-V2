@@ -20,7 +20,6 @@ const credits = [
     'editorial design',
     'october 2023',
     'typographic vocabulary, technical terms & history of typefaces',
-    'tags : typography, print',
 ];
 
 export default function TypographicLexiconProject() {

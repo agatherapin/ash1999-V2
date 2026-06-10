@@ -74,9 +74,9 @@ export default function Portfolio() {
 
         function getCanvasScale() {
             const w = window.innerWidth;
-            if (w <= 480) return 1.8;
-            if (w <= 768) return 1.8;
-            return 1;
+            if (w <= 480) return 1.45;
+            if (w <= 768) return 1.45;
+            return 0.88;
         }
 
         const canvasScale = getCanvasScale();

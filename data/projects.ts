@@ -12,8 +12,6 @@ export interface Project {
     aspectRatio: number;
     top: number;
     left: number;
-    /** 'light' for covers with a bright/white background (uses dark hover text). Defaults to 'dark'. */
-    cardTheme?: 'light' | 'dark';
 }
 
 export const projects: Project[] = [
@@ -35,9 +33,9 @@ export const projects: Project[] = [
             '/img/rare-stage/rapport-7.webp', '/img/rare-stage/rapport-8.webp',
             '/img/rare-stage/rapport-9.webp'
         ],
-        width: 320,
-        aspectRatio: 4 / 3,
-        top: 52.1,
+        width: 240,
+        aspectRatio: 3 / 4,
+        top: 47,
         left: 47
     },
     {
@@ -49,10 +47,10 @@ export const projects: Project[] = [
         image: '/img/suburban/titre-motion.mp4',
         video: '/img/suburban/titre-motion.mp4',
         gallery: ['/img/suburban/exterieur-mockup-suburban.webp', '/img/suburban/interieur-mockup-suburban.webp', '/img/suburban/logo.webp'],
-        width: 320,
-        aspectRatio: 4 / 3,
-        top: 13.87,
-        left: 51.5
+        width: 240,
+        aspectRatio: 3 / 4,
+        top: 12,
+        left: 53
     },
     {
         slug: 'la-pampa',
@@ -71,8 +69,8 @@ export const projects: Project[] = [
         ],
         width: 320,
         aspectRatio: 4 / 3,
-        top: 84.33,
-        left: 52.9
+        top: 82,
+        left: 53
     },
     {
         slug: 'wandanlage',
@@ -84,9 +82,8 @@ export const projects: Project[] = [
         gallery: ['video:https://pub-4640cb8748ff42a1bb9564c86066b471.r2.dev/wandalange_maquette_v1%20(1080p).mp4', '/img/wandanlage/page-close-up-platine.webp', '/img/wandanlage/page-previsualisation.webp', '/img/wandanlage/page-404.webp', '/img/wandanlage/scroll-horizontal.webp', '/img/wandanlage/footer.webp'],
         width: 320,
         aspectRatio: 4 / 3,
-        top: 46.8,
-        left: 82.13,
-        cardTheme: 'light'
+        top: 40,
+        left: 82,
     },
     {
         slug: 'interferences',
@@ -99,10 +96,10 @@ export const projects: Project[] = [
         gallery: ['/img/interferences/affiche-la-cale.webp','/img/interferences/affiche-final.webp', 
             'video:https://pub-4640cb8748ff42a1bb9564c86066b471.r2.dev/interference-video-1.mp4',
             '/img/interferences/flyer-face.webp', '/img/interferences/flyer-verso.webp', 'video:/img/interferences/motion-interferences.mp4'],
-        width: 320,
-        aspectRatio: 4 / 3,
-        top: 19.27,
-        left: 17.07
+        width: 240,
+        aspectRatio: 3 / 4,
+        top: 18,
+        left: 12
     },
     {
         slug: 'typographic-lexicon',
@@ -122,23 +119,8 @@ export const projects: Project[] = [
         ],
         width: 320,
         aspectRatio: 4 / 3,
-        top: 81.83,
-        left: 13.97,
-        cardTheme: 'light'
-    },
-    {
-        slug: 'gaussian-splatting',
-        title: 'Gaussian Splatting',
-        subtitle: 'February 2026',
-        description: '3D scanning and audio-reactive experiments in TouchDesigner using Gaussian Splats, during a workshop at Stéréolux, Nantes.',
-        tags: ['Interactive', 'Motion Design'],
-        image: 'https://pub-4640cb8748ff42a1bb9564c86066b471.r2.dev/GaussianSplat_Agathe.mp4',
-        video: 'https://pub-4640cb8748ff42a1bb9564c86066b471.r2.dev/GaussianSplat_Agathe.mp4',
-        gallery: ['video:https://pub-4640cb8748ff42a1bb9564c86066b471.r2.dev/GaussianSplat_Agathe.mp4',  'video:/img/interactive%20design/fridge-details-scan.mp4', '/img/interactive%20design/profile-scan-1.webp', '/img/interactive%20design/profile-scan.webp', 'video:/img/interactive%20design/img-flowers.mp4', 'video:/img/interactive%20design/shoes-scan.mp4', 'video:/img/interactive%20design/media-pipe-exp.mp4'],
-        width: 320,
-        aspectRatio: 4 / 3,
-        top: 19.77,
-        left: 82.53
+        top: 81,
+        left: 10,
     },
     {
         slug: 'motion-for-muji',
@@ -151,9 +133,8 @@ export const projects: Project[] = [
         gallery: ['video:https://pub-4640cb8748ff42a1bb9564c86066b471.r2.dev/RAPIN_AGATHE_MOTION.mp4'],
         width: 320,
         aspectRatio: 4 / 3,
-        top: 82.73,
-        left: 86.63,
-        cardTheme: 'light'
+        top: 87,
+        left: 80,
     },
     {
         slug: 'tamisee',
@@ -172,7 +153,7 @@ export const projects: Project[] = [
         ],
         width: 320,
         aspectRatio: 4 / 3,
-        top: 51.8,
-        left: 14.57
+        top: 53,
+        left: 20
     }
 ];

@@ -13,14 +13,13 @@ const credits = [
     'web design tribute',
     'june 2024',
     'a tribute to the dieter rams wall unit for braun',
-    'tags : web design',
 ];
 
 export default function WandanlageProject() {
     return (
         <ProjectShowcase
             backgroundImage="/img/wandanlage/cover-landing-page.webp"
-            titleLines={['wandanlage']}
+            titleLines={['wandanlage', 'design']}
             credits={credits}
             images={images}
         />

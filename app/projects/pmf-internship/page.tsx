@@ -24,7 +24,6 @@ const credits = [
     'internship : pmf music label',
     'jan – march 2025',
     'logo & mockups for rare',
-    'tags : branding',
 ];
 
 export default function PmfInternshipProject() {
