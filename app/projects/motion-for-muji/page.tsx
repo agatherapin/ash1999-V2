@@ -5,16 +5,16 @@ const images = [
 ];
 
 const credits = [
-    'motion design',
-    'december 2025',
-    'promo video for the muji wall mounted cd player',
+    'motion design video to promote one of my favorite muji product.',
+    'designed by the japanese designer Naoto Fukasawa.',
+    'date: december 2025',
 ];
 
 export default function MotionForMujiProject() {
     return (
         <ProjectShowcase
             backgroundVideo="https://pub-4640cb8748ff42a1bb9564c86066b471.r2.dev/RAPIN_AGATHE_MOTION.mp4"
-            titleLines={['motion for', 'muji']}
+            titleLines={['Muji', 'cd wall mounted player']}
             credits={credits}
             images={images}
         />

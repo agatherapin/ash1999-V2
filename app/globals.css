@@ -43,14 +43,24 @@ body {
     pointer-events: auto;
 }
 
-.logo {
-    height: 80px;
+.header-bio {
+    pointer-events: none;
+    max-width: 230px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-size: 12px;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.75);
 }
 
-.logo img {
-    height: 100%;
-    width: auto;
-    display: block;
+.header-bio p {
+    text-align: justify;
+}
+
+.header-bio a {
+    pointer-events: auto;
+    color: inherit;
 }
 
 /* =============================================
@@ -82,6 +92,12 @@ body {
 .profile-toggle:hover {
     background-color: rgba(255, 255, 255, 0.1);
     border-color: rgba(255, 255, 255, 0.4);
+}
+
+@media (min-width: 481px) {
+    .profile-toggle {
+        display: none;
+    }
 }
 
 /* =============================================
@@ -422,7 +438,7 @@ body {
 }
 
 .modal-content {
-    background-color: rgba(255, 255, 255, 0.05);
+    background-color: rgba(12, 12, 12, 0.068);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -504,8 +520,10 @@ body {
 .showcase-overlay {
     position: fixed;
     inset: 0;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
     z-index: 10;
-    background-color: rgba(0, 0, 0, 0.591);
+    background-color: rgba(0, 0, 0, 0.701);
 }
 
 .showcase-back {
@@ -515,8 +533,9 @@ body {
     z-index: 50;
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     height: 44px;
-    padding: 0 18px;
+    width: 44px;
     border-radius: 999px;
     border: 1px solid rgba(255, 255, 255, 0.25);
     background-color: rgba(255, 255, 255, 0.1);
@@ -524,7 +543,8 @@ body {
     -webkit-backdrop-filter: blur(20px);
     color: #fff;
     font-family: var(--font-neue-haas), "Neue Haas Grotesk Display", sans-serif;
-    font-size: 14px;
+    font-weight: 800;
+    font-size: 16px;
     text-decoration: none;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
     transition: all 0.2s ease;
@@ -540,19 +560,28 @@ body {
     pointer-events: none;
     position: fixed;
     inset: 0;
-    z-index: 30;
+    z-index: 10;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 4px;
     padding: 0 24px;
+    max-width: 620px;
+    margin: 0 auto;
     text-align: center;
     font-family: var(--font-neue-haas), "Neue Haas Grotesk Display", sans-serif;
+    font-weight: 400;
     font-size: 12px;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     color: rgba(255, 255, 255, 0.8);
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.showcase-credits--hidden {
+    opacity: 0;
 }
 
 .showcase-credits a {
@@ -604,8 +633,80 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 90px;
+    padding-bottom: 80px;
+}
+
+.showcase-related {
+    position: relative;
+    z-index: 20;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     gap: 40px;
-    padding-bottom: 880px;
+    padding: 60vh 24px 80px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.showcase-related-heading {
+    margin: 0;
+    font-family: var(--font-neue-haas), "Neue Haas Grotesk Display", sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.showcase-related-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 24px;
+    width: 100%;
+    max-width: 1100px;
+}
+
+.showcase-related-card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: min(320px, 100%);
+    text-decoration: none;
+    color: #fff;
+}
+
+.showcase-related-media {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.showcase-related-media img,
+.showcase-related-media video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.showcase-related-card:hover .showcase-related-media img,
+.showcase-related-card:hover .showcase-related-media video {
+    transform: scale(1.08);
+}
+
+.showcase-related-title {
+    font-family: var(--font-neue-haas), "Neue Haas Grotesk Display", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
 }
 
 .showcase-hero {
@@ -617,7 +718,7 @@ body {
     flex-direction: column;
     align-items: center;
     padding: 0 24px;
-    padding-top: 30vh;
+    padding-top: var(--hero-padding-top, 30vh);
     text-align: center;
 }
 
@@ -633,13 +734,13 @@ body {
 
 .showcase-title-main {
     font-size: clamp(28px, 6vw, 52px);
-    font-weight: 900;
-    line-height: 1.2;
+    font-weight: 700;
+    line-height: 0.9;
 }
 
 .showcase-title-sub {
     font-size: clamp(20px, 4vw, 34px);
-    font-weight: 500;
+    font-weight: 400;
 }
 
 .showcase-scroll-hint {
@@ -648,7 +749,7 @@ body {
     right: 0;
     bottom: 10vh;
     font-family: var(--font-neue-haas), "Neue Haas Grotesk Display", sans-serif;
-    font-size: 14px;
+    font-size: 12px;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     color: rgba(255, 255, 255, 0.8);
@@ -657,7 +758,7 @@ body {
 .showcase-image {
     position: relative;
     width: 90%;
-    max-width: 656px;
+    max-width: 620px;
     border-radius: 8px;
     object-fit: cover;
 }
@@ -681,11 +782,11 @@ body {
    ============================================= */
 .profile-modal-content {
     max-width: 490px;
-    background-color: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    background-color: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border: none;
+    box-shadow: none;
 }
 
 .profile-bio {
@@ -698,71 +799,6 @@ body {
     margin-bottom: 28px;
 }
 
-.profile-experience {
-    margin-bottom: 28px;
-}
-
-.profile-exp-label {
-    font-family: var(--font-neue-haas), "Neue Haas Grotesk Display", sans-serif;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.45);
-    margin-bottom: 16px;
-}
-
-.profile-exp-item {
-    margin-bottom: 20px;
-}
-
-.profile-exp-header {
-    display: flex;
-    align-items: baseline;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 5px;
-}
-
-.profile-exp-title {
-    font-family: var(--font-neue-haas), "Neue Haas Grotesk Display", sans-serif;
-    font-size: 15px;
-    font-weight: 700;
-    color: #fff;
-}
-
-.profile-exp-badge {
-    font-family: var(--font-neue-haas), "Neue Haas Grotesk Display", sans-serif;
-    font-size: 13px;
-    font-weight: 700;
-    color: #ec4899;
-    white-space: nowrap;
-}
-
-.profile-exp-desc {
-    font-family: var(--font-neue-haas), "Neue Haas Grotesk Display", sans-serif;
-    font-size: 13px;
-    font-weight: 400;
-    color: rgba(255, 255, 255, 0.65);
-    line-height: 1.6;
-    margin-bottom: 4px;
-}
-
-.profile-exp-date {
-    font-family: var(--font-neue-haas), "Neue Haas Grotesk Display", sans-serif;
-    font-size: 12px;
-    font-weight: 400;
-    color: rgba(255, 255, 255, 0.4);
-}
-
-.profile-contact {
-    font-family: var(--font-neue-haas), "Neue Haas Grotesk Display", sans-serif;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 1.9;
-    color: rgba(255, 255, 255, 0.55);
-}
-
 /* =============================================
    RESPONSIVE - TABLET (max-width: 768px)
    ============================================= */
@@ -771,8 +807,10 @@ body {
         padding: 16px;
     }
 
-    .logo {
-        height: 90px;
+    .header-bio {
+        max-width: 200px;
+        font-size: 11px;
+        gap: 8px;
     }
 
     .filter-toggle {
@@ -830,8 +868,8 @@ body {
         padding: 12px;
     }
 
-    .logo {
-        height: 60px;
+    .header-bio {
+        display: none;
     }
 
     .filter-container {

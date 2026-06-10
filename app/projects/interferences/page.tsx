@@ -10,9 +10,15 @@ const images = [
 ];
 
 const credits = [
-    'exhibition',
-    'november 2024',
-    'mapping & motion design by e-artsup students',
+    'exhibition about mapping and motion design',
+    'branding & artistic direction: @ash1999__ & @art_by_apolline',
+    'title design: @art_by_apolline',
+    'motion design: @ash1999__',
+    'mapping: third-year students at e-artsup ',
+    'date: november 2024',
+    'location: La cale 2 créateurs, Nantes',
+    
+
 ];
 
 export default function InterferencesProject() {

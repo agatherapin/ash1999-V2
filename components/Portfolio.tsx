@@ -721,9 +721,24 @@ export default function Portfolio() {
 
             {/* HEADER */}
             <div className="header">
-                <div className="logo">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={optimizedSrc('/img/etoile-logo.webp', 256)} alt="ash1999" width={80} height={80} />
+                <div className="header-bio">
+                    <p>
+                        <strong>ASH1999 graphic &amp; web designer<br /></strong>
+                    </p>
+                    <p>
+                        ★ Intern at Tamisée: association dedicated to promoting local underground music. Social content, graphism, branding, photography & artistic direction.<br />
+                        
+                    </p>
+                    <p>
+                        ★ Intern for Propulsion Music Family label (ThaHomey).
+                        Merch rebranding, logo creation and mockups.<br />
+                    </p>
+                    <p>
+                        Based in Nantes, France<br />
+                        link with me<br />
+                        <a href="https://www.instagram.com/ash1999__/" target="_blank" rel="noopener noreferrer">@ash1999__</a><br />
+                        <a href="mailto:agathe.rapin@outlook.fr">agathe.rapin@outlook.fr</a>
+                    </p>
                 </div>
 
                 {/* RIGHT CONTROLS */}
@@ -762,35 +777,22 @@ export default function Portfolio() {
                     <button className="modal-close" ref={profileModalCloseRef}>×</button>
                     <div className="modal-body">
                         <p className="profile-bio">
-Hello! <br />
-My name is Agathe and I&apos;m a French junior graphic designer. I like to explore multiple mediums and techniques. I&apos;ve been particularly drawn to interactive design, motion design &amp; web design lately. I love working with various media and blending traditional and digital approaches. Feel free to reach out if you're interested in collaborating. I love meeting new creatives!<br />
+                            I&apos;m a French graphic &amp; web designer<br />
+                            I love working with various media and blending traditional and digital approaches.
                         </p>
-
-                        <div className="profile-experience">
-                            <p className="profile-exp-label">Experiences</p>
-
-                            <div className="profile-exp-item">
-                                <div className="profile-exp-header">
-                                    <span className="profile-exp-title">Graphic &amp; web designer</span>
-                                    <span className="profile-exp-badge">★ INTERNSHIP</span>
-                                </div>
-                                <p className="profile-exp-desc">Tamisée, an association for the promotion of local underground culture and music.</p>
-                                <p className="profile-exp-date">April 2026 – June 2026</p>
-                            </div>
-
-                            <div className="profile-exp-item">
-                                <div className="profile-exp-header">
-                                    <span className="profile-exp-title">Graphic &amp; branding designer</span>
-                                    <span className="profile-exp-badge">★ INTERNSHIP</span>
-                                </div>
-                                <p className="profile-exp-desc">Propulsion Music Family, an independent rap label with ThaHomey as main artist. Merch rebranding, logo creation and mockups.</p>
-                                <p className="profile-exp-date">February 2025 – March 2025</p>
-                            </div>
-                        </div>
-
-                        <p className="profile-contact">
-                            <a href="https://www.instagram.com/ash1999__/" target="_blank" rel="noopener noreferrer" style={{color: 'inherit', textDecoration: 'none'}}>follow me on Instagram: @ash1999__</a> <br />
-                            <a href="https://www.linkedin.com/in/agathe-rapin/" target="_blank" rel="noopener noreferrer" style={{color: 'inherit', textDecoration: 'none'}}>find me on LinkedIn: Agathe Rapin</a> <br />
+                        <p className="profile-bio">
+                            Graphic designer for Tamisée<br />
+                            association for the promotion of local underground culture and music.
+                        </p>
+                        <p className="profile-bio">
+                            Graphic designer for PMF Music Label (ThaHomey) (jan 25 to march 25)<br />
+                            Merch rebranding, logo creation and mockups.
+                        </p>
+                        <p className="profile-bio">
+                            Based in Nantes, France<br />
+                            link with me<br />
+                            <a href="https://www.instagram.com/ash1999__/" target="_blank" rel="noopener noreferrer" style={{color: 'inherit', textDecoration: 'none'}}>@ash1999__</a><br />
+                            <a href="mailto:agathe.rapin@outlook.fr" style={{color: 'inherit', textDecoration: 'none'}}>agathe.rapin@outlook.fr</a>
                         </p>
                     </div>
                 </div>

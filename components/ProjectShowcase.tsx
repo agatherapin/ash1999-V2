@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { projects, type Project } from '@/data/projects';
 
 interface ProjectShowcaseProps {
     backgroundVideo?: string;
@@ -59,11 +61,94 @@ export default function ProjectShowcase({
     images,
 }: ProjectShowcaseProps) {
     const videoRef = useRef<HTMLVideoElement>(null);
+    const heroRef = useRef<HTMLDivElement>(null);
+    const titleRef = useRef<HTMLHeadingElement>(null);
+    const creditsRef = useRef<HTMLParagraphElement>(null);
+    const relatedRef = useRef<HTMLDivElement>(null);
+    const relatedHeadingRef = useRef<HTMLParagraphElement>(null);
     const [muted, setMuted] = useState(true);
+    const [relatedProjects, setRelatedProjects] = useState<Project[]>([]);
+    const [hideCredits, setHideCredits] = useState(false);
+    const pathname = usePathname();
 
     useEffect(() => {
         if (videoRef.current) videoRef.current.muted = muted;
     }, [muted]);
+
+    // Pick 3 random other projects to suggest at the bottom of the page.
+    // Done on the client only to avoid a hydration mismatch from Math.random().
+    useEffect(() => {
+        const currentSlug = pathname.split('/').filter(Boolean).pop();
+        const others = projects.filter((project) => project.slug !== currentSlug);
+        const shuffled = [...others].sort(() => Math.random() - 0.5);
+        setRelatedProjects(shuffled.slice(0, 3));
+    }, [pathname]);
+
+    // Hide the fixed, centered credits once the "discover more projects"
+    // heading scrolls into view, so they don't overlap it.
+    useEffect(() => {
+        const heading = relatedHeadingRef.current;
+        if (!heading) return;
+
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                setHideCredits(entry.isIntersecting);
+            },
+            { rootMargin: '0px 0px -35% 0px' }
+        );
+        observer.observe(heading);
+
+        return () => observer.disconnect();
+    }, [relatedProjects]);
+
+    // The credits block is fixed and centered on screen, while the title
+    // sits in normal flow with a 30vh top padding. Depending on how tall the
+    // credits are and the viewport height, the title can overlap the
+    // centered credits. Reduce the title's top padding just enough to keep a
+    // gap above the credits, without affecting the scroll-flow behavior.
+    useEffect(() => {
+        const hero = heroRef.current;
+        const title = titleRef.current;
+        const credits = creditsRef.current;
+        const firstCreditLine = credits?.firstElementChild as HTMLElement | null;
+        if (!hero || !title) return;
+
+        const MIN_PADDING_TOP = 96;
+        const GAP_ABOVE_CREDITS = 24;
+
+        function updatePadding() {
+            const viewportHeight = window.innerHeight;
+            const defaultPaddingTop = 0.3 * viewportHeight;
+
+            // Reset to the default padding before measuring, so the
+            // calculation always starts from a known baseline.
+            hero!.style.setProperty('--hero-padding-top', `${defaultPaddingTop}px`);
+
+            const titleBottom = title!.getBoundingClientRect().bottom;
+            const creditsTop = firstCreditLine
+                ? firstCreditLine.getBoundingClientRect().top
+                : viewportHeight;
+
+            const overlap = titleBottom + GAP_ABOVE_CREDITS - creditsTop;
+            const paddingTop = overlap > 0
+                ? Math.max(MIN_PADDING_TOP, defaultPaddingTop - overlap)
+                : defaultPaddingTop;
+
+            hero!.style.setProperty('--hero-padding-top', `${paddingTop}px`);
+        }
+
+        updatePadding();
+
+        const resizeObserver = new ResizeObserver(updatePadding);
+        resizeObserver.observe(title);
+        if (credits) resizeObserver.observe(credits);
+        window.addEventListener('resize', updatePadding);
+
+        return () => {
+            resizeObserver.disconnect();
+            window.removeEventListener('resize', updatePadding);
+        };
+    }, []);
 
     // The home page locks html/body (overflow hidden, fixed position) to drive
     // its drag-to-scroll canvas. Showcase pages are a normal scrolling document,
@@ -115,11 +200,11 @@ export default function ProjectShowcase({
             <div className="showcase-overlay" />
 
             <Link href="/" className="showcase-back">
-                ← Back to portfolio
+                ←
             </Link>
 
             {credits && credits.length > 0 && (
-                <p className="showcase-credits">
+                <p className={`showcase-credits${hideCredits ? ' showcase-credits--hidden' : ''}`} ref={creditsRef}>
                     {credits.map((line) =>
                         line.includes('<') ? (
                             <span key={line} dangerouslySetInnerHTML={{ __html: line }} />
@@ -143,8 +228,8 @@ export default function ProjectShowcase({
             )}
 
             <div className="showcase-content">
-                <div className="showcase-hero">
-                    <h1 className="showcase-title">
+                <div className="showcase-hero" ref={heroRef}>
+                    <h1 className="showcase-title" ref={titleRef}>
                         {titleLines.map((line, index) => (
                             <span key={line} className={index === 0 ? 'showcase-title-main' : 'showcase-title-sub'}>
                                 {line}
@@ -174,6 +259,30 @@ export default function ProjectShowcase({
                         <img key={src} src={url} alt="" loading="lazy" className={className} />
                     );
                 })}
+
+                {relatedProjects.length > 0 && (
+                    <div className="showcase-related" ref={relatedRef}>
+                        <p className="showcase-related-heading" ref={relatedHeadingRef}>Discover more projects</p>
+                        <div className="showcase-related-grid">
+                            {relatedProjects.map((project) => {
+                                const isVideo = project.image.endsWith('.mp4');
+
+                                return (
+                                    <Link key={project.slug} href={`/projects/${project.slug}`} className="showcase-related-card">
+                                        <div className="showcase-related-media">
+                                            {isVideo ? (
+                                                <video src={project.image} autoPlay loop muted playsInline />
+                                            ) : (
+                                                <img src={project.image} alt="" loading="lazy" />
+                                            )}
+                                        </div>
+                                        <span className="showcase-related-title">{project.title}</span>
+                                    </Link>
+                                );
+                            })}
+                        </div>
+                    </div>
+                )}
             </div>
         </section>
     );
