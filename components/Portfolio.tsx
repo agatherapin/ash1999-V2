@@ -2,22 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import { projects, Project } from '@/data/projects';
-
-// Slugs that already have a dedicated /projects/<slug> page (built on the
-// ProjectShowcase template). Projects not listed here still open the legacy
-// modal until their page is migrated.
-const PROJECT_PAGES = new Set([
-    'tamisee',
-    'pmf-internship',
-    'suburban',
-    'la-pampa',
-    'wandanlage',
-    'interferences',
-    'typographic-lexicon',
-    'gaussian-splatting',
-    'motion-for-muji',
-]);
+import { projects } from '@/data/projects';
 
 function optimizedSrc(src: string, width: number = 640): string {
     if (src.endsWith('.gif')) return src;
@@ -30,17 +15,9 @@ export default function Portfolio() {
     const canvasRef = useRef<HTMLDivElement>(null);
     const filterContainerRef = useRef<HTMLDivElement>(null);
     const filterToggleRef = useRef<HTMLButtonElement>(null);
-    const modalRef = useRef<HTMLDivElement>(null);
-    const modalBodyRef = useRef<HTMLDivElement>(null);
-    const modalCloseRef = useRef<HTMLButtonElement>(null);
     const profileToggleRef = useRef<HTMLButtonElement>(null);
     const profileModalRef = useRef<HTMLDivElement>(null);
     const profileModalCloseRef = useRef<HTMLButtonElement>(null);
-    const fullscreenViewerRef = useRef<HTMLDivElement>(null);
-    const fullscreenImgRef = useRef<HTMLImageElement>(null);
-    const fullscreenVideoRef = useRef<HTMLVideoElement>(null);
-    const fullscreenCloseRef = useRef<HTMLButtonElement>(null);
-    const fullscreenCounterRef = useRef<HTMLDivElement>(null);
     const instructionsRef = useRef<HTMLDivElement>(null);
     const loaderRef = useRef<HTMLDivElement>(null);
 
@@ -49,21 +26,10 @@ export default function Portfolio() {
         const canvas = canvasRef.current!;
         const filterContainer = filterContainerRef.current!;
         const filterToggle = filterToggleRef.current!;
-        const modal = modalRef.current!;
-        const modalBody = modalBodyRef.current!;
-        const modalClose = modalCloseRef.current!;
         const profileToggle = profileToggleRef.current!;
         const profileModal = profileModalRef.current!;
         const profileModalClose = profileModalCloseRef.current!;
-        const fullscreenViewer = fullscreenViewerRef.current!;
-        const fullscreenImg = fullscreenImgRef.current!;
-        const fullscreenVideo = fullscreenVideoRef.current!;
-        const fullscreenClose = fullscreenCloseRef.current!;
-        const fullscreenCounter = fullscreenCounterRef.current!;
         const loader = loaderRef.current;
-
-        let fullscreenMedia: {url: string, isVideo: boolean}[] = [];
-        let fullscreenIndex = 0;
 
         // =============================================
         // STATE
@@ -242,15 +208,9 @@ export default function Portfolio() {
 
                         item.addEventListener('click', () => {
                             if (!hasMoved) {
-                                if (PROJECT_PAGES.has(project.slug)) {
-                                    router.push(`/projects/${project.slug}`);
-                                } else {
-                                    openModal(project);
-                                }
+                                router.push(`/projects/${project.slug}`);
                             }
                         });
-
-                        item.addEventListener('mouseenter', () => preloadGallery(project));
 
                         fragment.appendChild(item);
                         itemsCache.push(item);
@@ -344,7 +304,7 @@ export default function Portfolio() {
         document.addEventListener('mouseup', handleMouseUp);
 
         function handleWheel(e: WheelEvent) {
-            if ((e.target as Element).closest('.modal-gallery, .modal-content')) return;
+            if ((e.target as Element).closest('.modal-content')) return;
             e.preventDefault();
 
             scrollLeftVal -= e.deltaX;
@@ -518,104 +478,6 @@ export default function Portfolio() {
         }
 
         // =============================================
-        // MODAL
-        // =============================================
-        function openModal(project: Project) {
-            preloadGallery(project);
-
-            const galleryTextHTML = project.fullDescription
-                ? `<div class="modal-gallery-item modal-gallery-text"><p>${project.fullDescription}</p></div>`
-                : '';
-
-            const galleryHTML = project.gallery ? project.gallery.map(item => {
-                if (item.startsWith('vimeo:')) {
-                    const videoId = item.replace('vimeo:', '');
-                    return `<div class="modal-gallery-item modal-video">
-                        <iframe src="https://player.vimeo.com/video/${videoId}?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&loop=1&muted=1"
-                            style="width: 100%; height: 100%; border-radius: 12px;"
-                            frameborder="0"
-                            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-                            referrerpolicy="strict-origin-when-cross-origin"
-                            allowfullscreen>
-                        </iframe>
-                    </div>`;
-                } else if (item.startsWith('video:')) {
-                    const videoSrc = item.replace('video:', '');
-                    return `<div class="modal-gallery-item">
-                        <video controls loop muted preload="metadata" playsinline>
-                            <source src="${videoSrc}" type="video/mp4">
-                        </video>
-                    </div>`;
-                } else {
-                    return `<div class="modal-gallery-item"><img src="${optimizedSrc(item, 828)}" data-full="${item}" alt="${project.title}" loading="lazy"></div>`;
-                }
-            }).join('') : '';
-
-            const tagsHTML = project.tags.map(tag =>
-                `<span class="modal-tag">${tag}</span>`
-            ).join('');
-
-            modalBody.innerHTML = `
-                <div class="modal-header">
-                    <h2 class="modal-title">${project.title}</h2>
-                    <p class="modal-subtitle">${project.subtitle}</p>
-                    <div class="modal-tags">${tagsHTML}</div>
-                </div>
-                ${galleryHTML ? `<div class="modal-gallery">${galleryTextHTML}${galleryHTML}</div>` : ''}
-            `;
-
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-
-            const gallery = modalBody.querySelector('.modal-gallery') as HTMLElement | null;
-            if (gallery) {
-                gallery.addEventListener('wheel', (e: WheelEvent) => {
-                    e.stopPropagation();
-                    gallery.scrollLeft += e.deltaY + e.deltaX;
-                }, { passive: true });
-            }
-
-            const lightboxMedia = project.gallery
-                ? project.gallery
-                    .filter(item => !item.startsWith('vimeo:'))
-                    .map(item => item.startsWith('video:')
-                        ? { url: item.replace('video:', ''), isVideo: true }
-                        : { url: item, isVideo: false })
-                : [];
-
-            if (lightboxMedia.length > 0) {
-                const galleryItems = modalBody.querySelectorAll('.modal-gallery-item:not(.modal-video):not(.modal-gallery-text)');
-                galleryItems.forEach((item, i) => {
-                    (item as HTMLElement).style.cursor = 'pointer';
-                    item.addEventListener('click', () => {
-                        openFullscreen(lightboxMedia, i);
-                    });
-                });
-            }
-        }
-
-        function closeModal() {
-            modal.classList.remove('active');
-            document.body.style.overflow = '';
-            modalBody.querySelectorAll('video').forEach(v => {
-                v.pause();
-                v.muted = true;
-            });
-        }
-
-        function handleModalCloseClick() {
-            closeModal();
-        }
-        modalClose.addEventListener('click', handleModalCloseClick);
-
-        function handleModalBackdropClick(e: MouseEvent) {
-            if (e.target === modal) {
-                closeModal();
-            }
-        }
-        modal.addEventListener('click', handleModalBackdropClick);
-
-        // =============================================
         // PROFILE MODAL
         // =============================================
         function openProfileModal() {
@@ -646,18 +508,8 @@ export default function Portfolio() {
         profileModal.addEventListener('click', handleProfileModalBackdropClick);
 
         function handleKeyDown(e: KeyboardEvent) {
-            if (fullscreenViewer.classList.contains('active')) {
-                if (e.key === 'Escape') closeFullscreen();
-                if (e.key === 'ArrowRight') navigateFullscreen(1);
-                if (e.key === 'ArrowLeft') navigateFullscreen(-1);
-                return;
-            }
             if (profileModal.classList.contains('active')) {
                 if (e.key === 'Escape') closeProfileModal();
-                return;
-            }
-            if (modal.classList.contains('active')) {
-                if (e.key === 'Escape') closeModal();
                 return;
             }
             if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
@@ -666,85 +518,6 @@ export default function Portfolio() {
             }
         }
         document.addEventListener('keydown', handleKeyDown);
-
-        // =============================================
-        // FULLSCREEN MEDIA VIEWER (images + videos)
-        // =============================================
-        function openFullscreen(media: {url: string, isVideo: boolean}[], index: number) {
-            fullscreenMedia = media;
-            fullscreenIndex = index;
-            updateFullscreenMedia();
-            fullscreenViewer.classList.add('active');
-        }
-
-        function closeFullscreen() {
-            fullscreenViewer.classList.remove('active');
-            fullscreenImg.hidden = true;
-            fullscreenImg.removeAttribute('src');
-            fullscreenVideo.hidden = true;
-            fullscreenVideo.pause();
-            fullscreenVideo.removeAttribute('src');
-        }
-
-        function navigateFullscreen(direction: number) {
-            // Pause current video before navigating
-            if (!fullscreenVideo.hidden) {
-                fullscreenVideo.pause();
-            }
-            fullscreenIndex += direction;
-            if (fullscreenIndex >= fullscreenMedia.length) fullscreenIndex = 0;
-            if (fullscreenIndex < 0) fullscreenIndex = fullscreenMedia.length - 1;
-            updateFullscreenMedia();
-        }
-
-        function updateFullscreenMedia() {
-            const item = fullscreenMedia[fullscreenIndex];
-            fullscreenCounter.textContent = `${fullscreenIndex + 1} / ${fullscreenMedia.length}`;
-            if (item.isVideo) {
-                fullscreenImg.hidden = true;
-                fullscreenImg.removeAttribute('src');
-                fullscreenVideo.src = item.url;
-                fullscreenVideo.hidden = false;
-                fullscreenVideo.play().catch(() => {});
-            } else {
-                fullscreenVideo.hidden = true;
-                fullscreenVideo.pause();
-                fullscreenVideo.removeAttribute('src');
-                fullscreenImg.src = item.url;
-                fullscreenImg.hidden = false;
-            }
-        }
-
-        function handleFullscreenCloseClick() {
-            closeFullscreen();
-        }
-        fullscreenClose.addEventListener('click', handleFullscreenCloseClick);
-
-        function handleFullscreenViewerClick(e: MouseEvent) {
-            if ((e.target as Element).closest('.fullscreen-close')) return;
-            if (fullscreenMedia.length <= 1) return;
-            const clickX = e.clientX;
-            if (clickX < window.innerWidth / 2) {
-                navigateFullscreen(-1);
-            } else {
-                navigateFullscreen(1);
-            }
-        }
-        fullscreenViewer.addEventListener('click', handleFullscreenViewerClick);
-
-        let fsStartX = 0;
-        function handleFsTouchStart(e: TouchEvent) {
-            fsStartX = e.touches[0].clientX;
-        }
-        fullscreenViewer.addEventListener('touchstart', handleFsTouchStart, { passive: true });
-
-        function handleFsTouchEnd(e: TouchEvent) {
-            const diff = e.changedTouches[0].clientX - fsStartX;
-            if (Math.abs(diff) > 50) {
-                navigateFullscreen(diff > 0 ? -1 : 1);
-            }
-        }
-        fullscreenViewer.addEventListener('touchend', handleFsTouchEnd, { passive: true });
 
         // =============================================
         // ASYNC IMAGE LOADING WITH PLACEHOLDERS
@@ -870,24 +643,6 @@ export default function Portfolio() {
         const loaderTimeout = setTimeout(hideLoader, 3000);
 
         // =============================================
-        // ON-DEMAND GALLERY PRELOAD
-        // =============================================
-        const preloadedGalleries = new Set<string>();
-
-        function preloadGallery(project: Project) {
-            if (preloadedGalleries.has(project.title)) return;
-            preloadedGalleries.add(project.title);
-
-            if (!project.gallery) return;
-            project.gallery.forEach(src => {
-                if (src.startsWith('vimeo:') || src.startsWith('video:')) return;
-                const img = new window.Image();
-                img.src = optimizedSrc(src, 828);
-                img.decode().catch(() => {});
-            });
-        }
-
-        // =============================================
         // INIT
         // =============================================
         createFilterButtons();
@@ -943,21 +698,12 @@ export default function Portfolio() {
 
             if (!isTouchDevice) {
                 document.removeEventListener('mousemove', handleDesktopMouseMove);
-                document.removeEventListener('mouseover', handleCursorOver);
-                document.removeEventListener('mouseout', handleCursorOut);
             }
 
-            modalClose.removeEventListener('click', handleModalCloseClick);
-            modal.removeEventListener('click', handleModalBackdropClick);
             profileToggle.removeEventListener('click', handleProfileToggleClick);
             profileModalClose.removeEventListener('click', handleProfileModalCloseClick);
             profileModal.removeEventListener('click', handleProfileModalBackdropClick);
             document.removeEventListener('keydown', handleKeyDown);
-
-            fullscreenClose.removeEventListener('click', handleFullscreenCloseClick);
-            fullscreenViewer.removeEventListener('click', handleFullscreenViewerClick);
-            fullscreenViewer.removeEventListener('touchstart', handleFsTouchStart);
-            fullscreenViewer.removeEventListener('touchend', handleFsTouchEnd);
 
             if (videoObserver) videoObserver.disconnect();
             canvas.innerHTML = '';
@@ -1010,14 +756,6 @@ export default function Portfolio() {
                 </div>
             </div>
 
-            {/* MODAL */}
-            <div className="modal" ref={modalRef}>
-                <div className="modal-content">
-                    <button className="modal-close" ref={modalCloseRef}>×</button>
-                    <div className="modal-body" ref={modalBodyRef}></div>
-                </div>
-            </div>
-
             {/* PROFILE MODAL */}
             <div className="modal" ref={profileModalRef}>
                 <div className="modal-content profile-modal-content">
@@ -1056,15 +794,6 @@ My name is Agathe and I&apos;m a French junior graphic designer. I like to explo
                         </p>
                     </div>
                 </div>
-            </div>
-
-            {/* FULLSCREEN IMAGE VIEWER */}
-            <div className="fullscreen-viewer" ref={fullscreenViewerRef}>
-                <button className="fullscreen-close" ref={fullscreenCloseRef}>×</button>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img ref={fullscreenImgRef} alt="" hidden />
-                <video ref={fullscreenVideoRef} loop playsInline controls hidden />
-                <div className="fullscreen-counter" ref={fullscreenCounterRef}></div>
             </div>
         </>
     );
