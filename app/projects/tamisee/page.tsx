@@ -1,24 +1,27 @@
 import ProjectShowcase from '@/components/ProjectShowcase';
 
 const images = [
-    '/img/tamisee/img8474.webp',
-    '/img/tamisee/img8412.webp',
-    '/img/tamisee/img8408.webp',
-    '/img/tamisee/img8310.webp',
+    '/img/tamisee/39440031.JPG', 
+    '/img/tamisee/IMG_8408 2.jpeg',
     '/img/tamisee/img8317.webp',
-    '/img/tamisee/img8344.webp',
-    '/img/tamisee/img8245.webp',
-    '/img/tamisee/img8399.webp',
+    '/img/tamisee/39450025.JPG',
+    '/img/tamisee/39450020.JPG',
+    '/img/tamisee/img8474.webp',
+    '/img/tamisee/39440014.JPG',
     '/img/tamisee/img8230.webp',
+    'video:/img/tamisee/scan-leo.MP4',
 ];
 
 const credits = [
-    'artistic direction : @ash1999__ & @zero.to.death',
-    'photography : @brutalvizion & @ash1999__',
-    'models : @juliette & @edwin',
-    'merch : @tamisée & @zero.to.death',
-    'scenography : @girl',
-    'location : ferrailleur, nantes',
+    'artistic direction: @ash1999__ & @zero.to.death',
+    'photography: @brutal.vizion & @ash1999__',
+    'models: @kushinailz & @edwin.ksb',
+    'merch design: @zero.to.death',
+    '3D scan: @ash1999__',
+    '<br/>',
+    'Concert artists: 8ruki & rowjay',
+    'hosted and conceived by @Tamisee__',
+    'location: ferrailleur, nantes',
 ];
 
 export default function TamiseeProject() {

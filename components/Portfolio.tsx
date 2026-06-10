@@ -83,9 +83,9 @@ export default function Portfolio() {
         const TILE_WIDTH = (window.innerWidth + 300) * canvasScale;
         const TILE_HEIGHT = (window.innerHeight + 300) * canvasScale;
 
-        // Center the initial view on the main project cluster (Wandanlage, Skyjo, etc.)
-        scrollLeftVal = -(0.60 * TILE_WIDTH - window.innerWidth / 2);
-        scrollTopVal = -(0.99 * TILE_HEIGHT - window.innerHeight / 2);
+        // Center the initial view on the Tamisée project
+        scrollLeftVal = -(0.25 * TILE_WIDTH - window.innerWidth / 2);
+        scrollTopVal = -(0.58 * TILE_HEIGHT - window.innerHeight / 2);
 
         // =============================================
         // FILTERS
@@ -730,7 +730,7 @@ export default function Portfolio() {
                         
                     </p>
                     <p>
-                        ★ Intern for Propulsion Music Family label (ThaHomey).
+                        ★Intern for Propulsion Music Family label (ThaHomey).
                         Merch rebranding, logo creation and mockups.<br />
                     </p>
                     <p>
@@ -777,15 +777,13 @@ export default function Portfolio() {
                     <button className="modal-close" ref={profileModalCloseRef}>×</button>
                     <div className="modal-body">
                         <p className="profile-bio">
-                            I&apos;m a French graphic &amp; web designer<br />
-                            I love working with various media and blending traditional and digital approaches.
+                            <strong>ASH1999 graphic &amp; web designer</strong>
                         </p>
                         <p className="profile-bio">
-                            Graphic designer for Tamisée<br />
-                            association for the promotion of local underground culture and music.
+                            ★ Intern at Tamisée: association dedicated to promoting local underground music. Social content, graphism, branding, photography &amp; artistic direction.
                         </p>
                         <p className="profile-bio">
-                            Graphic designer for PMF Music Label (ThaHomey) (jan 25 to march 25)<br />
+                            ★Intern for Propulsion Music Family label (ThaHomey).
                             Merch rebranding, logo creation and mockups.
                         </p>
                         <p className="profile-bio">

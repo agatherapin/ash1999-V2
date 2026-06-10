@@ -10,16 +10,16 @@ const images = [
 ];
 
 const credits = [
-    'web design tribute',
-    'june 2024',
-    'a tribute to the dieter rams wall unit for braun',
+    'landing page to the dieter rams wall unit for braun.',
+    'concept and web design, built on Figma.',   
+    'date: june 2024',
 ];
 
 export default function WandanlageProject() {
     return (
         <ProjectShowcase
             backgroundImage="/img/wandanlage/cover-landing-page.webp"
-            titleLines={['wandanlage', 'design']}
+            titleLines={['wandanlage by dieter rams', 'web design tribute']}
             credits={credits}
             images={images}
         />

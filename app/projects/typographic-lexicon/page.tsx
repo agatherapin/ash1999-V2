@@ -17,16 +17,15 @@ const images = [
 ];
 
 const credits = [
-    'editorial design',
-    'october 2023',
-    'typographic vocabulary, technical terms & history of typefaces',
+    'glossary of essential typographic terms, concepts & history.',
+    'date: october 2023',
 ];
 
 export default function TypographicLexiconProject() {
     return (
         <ProjectShowcase
             backgroundImage="/img/lexique-typographique/cover.webp"
-            titleLines={['typographic', 'lexicon']}
+            titleLines={['typographic lexicon', 'all you need to know about type']}
             credits={credits}
             images={images}
         />

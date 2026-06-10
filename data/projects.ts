@@ -120,7 +120,7 @@ export const projects: Project[] = [
         width: 320,
         aspectRatio: 4 / 3,
         top: 81,
-        left: 10,
+        left: 3,
     },
     {
         slug: 'motion-for-muji',
@@ -142,8 +142,8 @@ export const projects: Project[] = [
         subtitle: 'May 2026',
         description: 'Merchandising design and creation for Tamisée.',
         tags: ['Branding'],
-        image: '/img/tamisee/bg-video.mp4',
-        video: '/img/tamisee/bg-video.mp4',
+        image: '/img/tamisee/scan-leo.webp',
+        video: '/img/tamisee/scan-leo.mp4',
         gallery: [
             '/img/tamisee/img8474.webp', '/img/tamisee/img8412.webp',
             '/img/tamisee/img8408.webp', '/img/tamisee/img8310.webp',
@@ -151,9 +151,9 @@ export const projects: Project[] = [
             '/img/tamisee/img8245.webp', '/img/tamisee/img8399.webp',
             '/img/tamisee/img8230.webp'
         ],
-        width: 320,
-        aspectRatio: 4 / 3,
-        top: 53,
-        left: 20
+        width: 240,
+        aspectRatio: 3 / 4,
+        top: 58,
+        left: 25
     }
 ];

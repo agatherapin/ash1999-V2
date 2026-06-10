@@ -69,6 +69,8 @@ export default function ProjectShowcase({
     const [muted, setMuted] = useState(true);
     const [relatedProjects, setRelatedProjects] = useState<Project[]>([]);
     const [hideCredits, setHideCredits] = useState(false);
+    const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+    const [zoomed, setZoomed] = useState(false);
     const pathname = usePathname();
 
     useEffect(() => {
@@ -149,6 +151,27 @@ export default function ProjectShowcase({
             window.removeEventListener('resize', updatePadding);
         };
     }, []);
+
+    // Lock body scroll while the lightbox is open and allow closing/navigating with the keyboard.
+    useEffect(() => {
+        setZoomed(false);
+        if (lightboxIndex === null) return;
+
+        const previousOverflow = document.body.style.overflow;
+        document.body.style.overflow = 'hidden';
+
+        function handleKeyDown(e: KeyboardEvent) {
+            if (e.key === 'Escape') setLightboxIndex(null);
+            if (e.key === 'ArrowLeft') setLightboxIndex((current) => current === null ? null : (current - 1 + images.length) % images.length);
+            if (e.key === 'ArrowRight') setLightboxIndex((current) => current === null ? null : (current + 1) % images.length);
+        }
+        window.addEventListener('keydown', handleKeyDown);
+
+        return () => {
+            document.body.style.overflow = previousOverflow;
+            window.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [lightboxIndex, images.length]);
 
     // The home page locks html/body (overflow hidden, fixed position) to drive
     // its drag-to-scroll canvas. Showcase pages are a normal scrolling document,
@@ -244,6 +267,8 @@ export default function ProjectShowcase({
                     const url = isVideo ? src.slice('video:'.length) : src;
                     const className = `showcase-image ${index % 2 === 0 ? 'showcase-image-front' : 'showcase-image-back'}`;
 
+                    const openLightbox = () => setLightboxIndex(index);
+
                     return isVideo ? (
                         <video
                             key={src}
@@ -254,9 +279,17 @@ export default function ProjectShowcase({
                             muted
                             playsInline
                             preload="metadata"
+                            onClick={openLightbox}
                         />
                     ) : (
-                        <img key={src} src={url} alt="" loading="lazy" className={className} />
+                        <img
+                            key={src}
+                            src={url}
+                            alt=""
+                            loading="lazy"
+                            className={className}
+                            onClick={openLightbox}
+                        />
                     );
                 })}
 
@@ -284,6 +317,59 @@ export default function ProjectShowcase({
                     </div>
                 )}
             </div>
+
+            {lightboxIndex !== null && (() => {
+                const src = images[lightboxIndex];
+                const isVideo = src.startsWith('video:');
+                const url = isVideo ? src.slice('video:'.length) : src;
+
+                const goToAdjacent = (e: React.MouseEvent) => {
+                    const half = window.innerWidth / 2;
+                    setLightboxIndex((current) => {
+                        if (current === null) return null;
+                        const delta = e.clientX < half ? -1 : 1;
+                        return (current + delta + images.length) % images.length;
+                    });
+                };
+
+                return (
+                    <div className="showcase-lightbox" onClick={goToAdjacent}>
+                        <button
+                            type="button"
+                            className="showcase-lightbox-close"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                setLightboxIndex(null);
+                            }}
+                            aria-label="Fermer"
+                        >
+                            ×
+                        </button>
+                        {isVideo ? (
+                            <video
+                                src={url}
+                                className="showcase-lightbox-media"
+                                controls
+                                autoPlay
+                                loop
+                                playsInline
+                                onClick={(e) => e.stopPropagation()}
+                            />
+                        ) : (
+                            // eslint-disable-next-line @next/next/no-img-element
+                            <img
+                                src={url}
+                                alt=""
+                                className={`showcase-lightbox-media${zoomed ? ' showcase-lightbox-media--zoomed' : ''}`}
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    setZoomed((current) => !current);
+                                }}
+                            />
+                        )}
+                    </div>
+                );
+            })()}
         </section>
     );
 }

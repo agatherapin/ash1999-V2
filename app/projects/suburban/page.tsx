@@ -7,16 +7,16 @@ const images = [
 ];
 
 const credits = [
-    'trifold brochure',
-    'jan 2024',
-    'fictional festival around rap music & urban culture',
+    'Suburban is the name of a fictitious music, rap, urban culture and streetwear organization. <br>Creation of a trifold brochure to promote the festival.',
+    '3D logo design, editorial work & text by me',
+    'date: january 2024',
 ];
 
 export default function SuburbanProject() {
     return (
         <ProjectShowcase
             backgroundVideo="/img/suburban/titre-motion.mp4"
-            titleLines={['suburban', 'design']}
+            titleLines={['suburban', 'rap music & urban culture']}
             credits={credits}
             images={images}
         />
