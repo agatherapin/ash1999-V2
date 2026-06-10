@@ -196,7 +196,7 @@ export default function Portfolio() {
                                     ${coverHTML}
                                     ${isFeatured ? '<span class="featured-badge">NEW</span>' : ''}
                                 </div>
-                                <div class="card-hover-glass">
+                                <div class="card-hover-glass${project.cardTheme === 'light' ? ' theme-light' : ''}">
                                     <div class="card-hover-text">
                                         <h3 class="card-hover-title">${project.title}</h3>
                                         <p class="card-hover-description">${project.description}</p>

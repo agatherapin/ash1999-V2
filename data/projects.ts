@@ -12,6 +12,8 @@ export interface Project {
     aspectRatio: number;
     top: number;
     left: number;
+    /** 'light' for covers with a bright/white background (uses dark hover text). Defaults to 'dark'. */
+    cardTheme?: 'light' | 'dark';
 }
 
 export const projects: Project[] = [
@@ -83,7 +85,8 @@ export const projects: Project[] = [
         width: 320,
         aspectRatio: 4 / 3,
         top: 46.8,
-        left: 82.13
+        left: 82.13,
+        cardTheme: 'light'
     },
     {
         slug: 'interferences',
@@ -120,7 +123,8 @@ export const projects: Project[] = [
         width: 320,
         aspectRatio: 4 / 3,
         top: 81.83,
-        left: 13.97
+        left: 13.97,
+        cardTheme: 'light'
     },
     {
         slug: 'gaussian-splatting',
@@ -148,7 +152,8 @@ export const projects: Project[] = [
         width: 320,
         aspectRatio: 4 / 3,
         top: 82.73,
-        left: 86.63
+        left: 86.63,
+        cardTheme: 'light'
     },
     {
         slug: 'tamisee',
