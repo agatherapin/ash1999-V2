@@ -67,7 +67,7 @@ export const projects: Project[] = [
         ],
         width: 320,
         aspectRatio: 4 / 3,
-        top: 82,
+        top: 80,
         left: 53
     },
     {
@@ -132,7 +132,7 @@ export const projects: Project[] = [
         gallery: ['video:https://pub-4640cb8748ff42a1bb9564c86066b471.r2.dev/RAPIN_AGATHE_MOTION.mp4'],
         width: 320,
         aspectRatio: 4 / 3,
-        top: 87,
+        top: 3,
         left: 80,
     },
     {
