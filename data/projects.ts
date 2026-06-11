@@ -142,8 +142,8 @@ export const projects: Project[] = [
         subtitle: 'May 2026',
         description: 'Merchandising design and creation for Tamisée.',
         tags: ['Branding'],
-        image: '/img/tamisee/scan-leo.webp',
-        video: '/img/tamisee/scan-leo.mp4',
+        image: '/img/tamisee/scan-leo.MP4',
+        video: '/img/tamisee/scan-leo.MP4',
         gallery: [
             '/img/tamisee/img8474.webp', '/img/tamisee/img8412.webp',
             '/img/tamisee/img8408.webp', '/img/tamisee/img8310.webp',
