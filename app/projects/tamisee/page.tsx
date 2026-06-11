@@ -1,15 +1,15 @@
 import ProjectShowcase from '@/components/ProjectShowcase';
 
 const images = [
-    '/img/tamisee/39440031.JPG', 
-    '/img/tamisee/IMG_8408 2.jpeg',
+    '/img/tamisee/39440031.webp',
+    '/img/tamisee/IMG_8408-2.webp',
     '/img/tamisee/img8317.webp',
-    '/img/tamisee/39450025.JPG',
-    '/img/tamisee/39450020.JPG',
+    '/img/tamisee/39450025.webp',
+    '/img/tamisee/39450020.webp',
     '/img/tamisee/img8474.webp',
-    '/img/tamisee/39440014.JPG',
+    '/img/tamisee/39440014.webp',
     '/img/tamisee/img8230.webp',
-    'video:/img/tamisee/scan-leo.MP4',
+    'video:/img/tamisee/scan-leo.mp4',
 ];
 
 const credits = [

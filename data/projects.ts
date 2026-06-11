@@ -3,7 +3,6 @@ export interface Project {
     title: string;
     subtitle: string;
     description: string;
-    fullDescription?: string;
     tags: string[];
     image: string;
     video?: string;
@@ -57,7 +56,6 @@ export const projects: Project[] = [
         title: 'La Pampa',
         subtitle: 'March 2026',
         description: 'Video for my project La Pampa, a media for local artists and events.',
-        fullDescription: 'La Pampa is an independent media dedicated to local artists and cultural events. It was born from the desire to give visibility to emerging creatives who operate outside mainstream circuits. The project combines editorial content, motion design and visual identity into a coherent whole.<a href="https://lapampamedia.vercel.app/" target="_blank" rel="noopener noreferrer">Visit the website.</a>',
         tags: ['Motion Design', 'Print', 'Webdesign', 'Interactive'],
         image: 'https://pub-4640cb8748ff42a1bb9564c86066b471.r2.dev/motion-la-pampa.mp4',
         video: 'https://pub-4640cb8748ff42a1bb9564c86066b471.r2.dev/motion-la-pampa.mp4',
@@ -142,8 +140,8 @@ export const projects: Project[] = [
         subtitle: 'May 2026',
         description: 'Merchandising design and creation for Tamisée.',
         tags: ['Branding'],
-        image: '/img/tamisee/scan-leo.MP4',
-        video: '/img/tamisee/scan-leo.MP4',
+        image: '/img/tamisee/scan-leo.mp4',
+        video: '/img/tamisee/scan-leo.mp4',
         gallery: [
             '/img/tamisee/img8474.webp', '/img/tamisee/img8412.webp',
             '/img/tamisee/img8408.webp', '/img/tamisee/img8310.webp',

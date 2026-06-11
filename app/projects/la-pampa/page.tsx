@@ -11,10 +11,9 @@ const images = [
 ];
 
 const credits = [
-    'La Pampa aims to highlight artists, venues, events, and, more broadly, the province’s entire creative scene.',
-    'The site offers a space that fosters creative inspiration, <br/> breaking away from endless scrolling and passive browsing habits.',
-    '<br/>artistic direction, motion design, editorial design, web design and the whole project has been imagined, created, written and developped <br>by me @ash1999__',
-    'featured artists: @juliedoriath, @luciepng, @kuro_222, Aiman Khalid,',
+    'La Pampa is an independent media dedicated to local artists and cultural events. It was born from the desire to give visibility to emerging creatives who operate outside mainstream circuits.',
+    '<br><br>The project combines editorial content, motion design and visual identity into a coherent whole. The whole project has been imagined, created, written and developped by me @ash1999__',
+    '<br>featured artists: @juliedoriath, @luciepng, @kuro_222, Aiman Khalid,',
     '<a href="https://lapampamedia.vercel.app/" target="_blank" rel="noopener noreferrer">visit the website ↗</a>',
 ];
 
