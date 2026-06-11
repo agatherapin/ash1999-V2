@@ -11,6 +11,7 @@ export interface Project {
     aspectRatio: number;
     top: number;
     left: number;
+    featured?: boolean;
 }
 
 export const projects: Project[] = [
@@ -68,7 +69,8 @@ export const projects: Project[] = [
         width: 320,
         aspectRatio: 4 / 3,
         top: 80,
-        left: 53
+        left: 53,
+        featured: true
     },
     {
         slug: 'wandanlage',
@@ -153,6 +155,7 @@ export const projects: Project[] = [
         width: 240,
         aspectRatio: 3 / 4,
         top: 58,
-        left: 25
+        left: 25,
+        featured: true
     }
 ];

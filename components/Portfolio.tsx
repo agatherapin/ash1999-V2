@@ -171,8 +171,6 @@ export default function Portfolio() {
                     projects.forEach((project) => {
                         const item = document.createElement('div');
                         item.className = 'item';
-                        const isFeatured = ['La Pampa introduction', 'Gaussian Splatting'].includes(project.title);
-
                         const scaledWidth = project.width * scale;
                         const itemHeight = scaledWidth / project.aspectRatio;
                         item.style.width = scaledWidth + 'px';
@@ -195,7 +193,6 @@ export default function Portfolio() {
                             <div class="item-card" style="aspect-ratio: ${project.aspectRatio};">
                                 <div class="item-image">
                                     ${coverHTML}
-                                    ${isFeatured ? '<span class="featured-badge">NEW</span>' : ''}
                                 </div>
                                 <div class="card-hover-glass">
                                     <div class="card-hover-text">
@@ -205,6 +202,7 @@ export default function Portfolio() {
                                     <span class="card-hover-hint">click to discover</span>
                                 </div>
                             </div>
+                            ${project.featured ? '<span class="featured-badge">★</span>' : ''}
                         `;
 
                         item.addEventListener('click', () => {
