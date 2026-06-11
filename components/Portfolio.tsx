@@ -86,6 +86,7 @@ export default function Portfolio() {
         // Center the initial view on the Tamisée project
         scrollLeftVal = -(0.25 * TILE_WIDTH - window.innerWidth / 2);
         scrollTopVal = -(0.58 * TILE_HEIGHT - window.innerHeight / 2);
+        updateCanvasTransform();
 
         // =============================================
         // FILTERS
