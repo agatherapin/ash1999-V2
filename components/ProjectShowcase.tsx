@@ -94,7 +94,7 @@ export default function ProjectShowcase({
 
         const observer = new IntersectionObserver(
             ([entry]) => {
-                setHideCredits(entry.isIntersecting);
+                setHideCredits((current) => current || entry.isIntersecting);
             },
             { rootMargin: '0px 0px -35% 0px' }
         );
